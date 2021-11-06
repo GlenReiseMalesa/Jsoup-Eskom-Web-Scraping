@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -41,10 +43,29 @@ public class Main {
         
 		try {
 			doc = Jsoup.connect(url).get();
-	           Elements statusText = doc.getElementsByClass("scheduleDay").select("div");
+	           Elements statusText = doc.getElementsByClass("scheduleDay");
 	           String schedule = statusText.text().toString(); 
 	           
-	           System.out.println(schedule);
+	           
+	           //Getting daily loadshedding schedules for each suburb
+	           String pattern = "(([A-Z])\\w+[,][\\s]\\d+[\\s]([A-Z])\\w+)([\\s]\\d+[:]\\d+[\\s][-][\\s]\\d+[:]\\d+)+";
+
+	           Pattern r = Pattern.compile(pattern);
+
+	           Matcher m = r.matcher(schedule);
+	           while(m.find( )) {
+	        	   //get all the schedules for each day
+	        	    String dailyScheduleDATETIME = m.group();
+	        	    System.out.println(dailyScheduleDATETIME);
+	        	    
+	        	   //now we have to break up all the daily schedules times in the string
+		
+	        	    
+	        	    
+	        	    
+	        	    
+	           }
+	         
 	         
 		} catch (IOException e) {
 			
