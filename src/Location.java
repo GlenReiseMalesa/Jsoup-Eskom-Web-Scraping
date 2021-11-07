@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,7 +17,7 @@ public class Location {
 	static int id = 0;
 	
 	public Location() {
-		// TODO Auto-generated constructor stub
+		
 		
 		//for every province get it's list of municipalities
 		for(int i = 1;i <= 9;i++) {
@@ -108,6 +108,7 @@ public static String MunicipalityHttpReqAndRes(String URL) {
 	
 	public static void parseMunicipaliies(String provinceName,String response) {
 		
+		//We are getting all the json data about municipalities and turning it into readable string
 		JSONArray bodies = new JSONArray(response);
 		
 		for(int i = 0;i<bodies.length();i++) {
@@ -119,10 +120,6 @@ public static String MunicipalityHttpReqAndRes(String URL) {
 			
 			
 			//send http request to get back surburb data
-			//System.out.println(provinceName);
-			
-		
-			
 			parseSurburb(MunicipalityHttpReqAndRes("https://loadshedding.eskom.co.za/LoadShedding/GetSurburbData/?callback=jQuery19102955907279405847_1636147019478&pageSize=100&pageNum=1&searchTerm=&id="+municipalIndex+"&_=1636147019479"),provinceName, municipality,municipalIndex);
 		}
 	}
@@ -136,9 +133,8 @@ public static String MunicipalityHttpReqAndRes(String URL) {
 		 response = response.substring(0, response.indexOf("]"));	    
 		}	    
   
+		//We are getting all the json data about suburbs and turning it into readable string
 		JSONArray bodies = new JSONArray("["+response+"]");
-		
-		
 		
 		for(int i = 0;i<bodies.length();i++) {
 		
@@ -146,14 +142,11 @@ public static String MunicipalityHttpReqAndRes(String URL) {
 			
 			String surburb = body.getString("text");
 			int surburbIndex = body.getInt("id");
-			//int tot = body.getInt("Tot");
+			
 			
 			
 			//this is where our location list will be filled
-			//not everything is being added to the list..........fix this tomorrow
-			id += 1;
-			
-			
+			id += 1;//uniquely identifies each area
 			location.add(new LocationModel(provinceName,municipalityName,surburb,surburbIndex,id));
 			
 		}

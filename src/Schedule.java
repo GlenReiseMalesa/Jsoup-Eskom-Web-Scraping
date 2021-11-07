@@ -14,12 +14,11 @@ public class Schedule {
 		public Schedule(String search) {
 			
 			//accessing the location data
-	        Location l  = new Location();    
+	        @SuppressWarnings("unused")
+			Location l  = new Location();    
 	        
 	        ///Everything needed to get back the schedule of each surburb           
-		     //Getting the loadshedding schedule 
-		    	
-		    	 		    	  
+		     //Getting the loadshedding schedule  		    	  
 		    	 for(int i=0;i < Location.location.size();i++) {
 		    		 
 		    		 
@@ -74,7 +73,7 @@ public class Schedule {
 	        	    	loadSheddingTime = timeMatcher.group();
 	        	    	
 	        	    	
-	        	    	//This is where we get the proper schedule
+	        	    	//This is where we get and store the proper schedule
 	        	        LoadSheddingFullSchedule.add(new ScheduleModel(province,municipality,surburb, loadSheddingDate, loadSheddingTime));
 	        	    }
 	        	    
@@ -96,7 +95,7 @@ public class Schedule {
 	           Elements statusText = doc.getElementsByClass("eskom-ls-text").select("b");
 	           String status = statusText.text().toString(); 
 	           
-	           //get the stage number
+	           //get the loadshedding stage number
 	           char stat = status.charAt(status.length() - 1);
 	           
 	           return Integer.parseInt(stat+"");
