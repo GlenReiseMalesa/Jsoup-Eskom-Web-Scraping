@@ -5,15 +5,24 @@ public class LocationModel {
 	String municipality;
 	String surburb;
 	int surburbIndex;
+	int id;
 
-	public LocationModel(String province,String municipality,String surburb,int surburbIndex) {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public LocationModel(String province,String municipality,String surburb,int surburbIndex,int id) {
 		// TODO Auto-generated constructor stub
 		
 		 this.province = province;
 		 this.municipality =  municipality;
 		 this.surburb = surburb;
 		 this.surburbIndex = surburbIndex;
-		
+		 this.id = id;
 	}
 
 	public String getProvince() {

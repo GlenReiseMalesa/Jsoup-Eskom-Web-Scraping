@@ -7,12 +7,14 @@ public class ScheduleModel {
 	String province;
 	String municipality;
 	public ScheduleModel(String province,String municipality,String  suburb,String Date,String Time) {
+		
 		// TODO Auto-generated constructor stub
 		this.suburb = suburb;
 		this.Date = Date;
 		this.Time=Time;
 		this.province = province;
 		this.municipality = municipality;
+		
 	}
 	
 	

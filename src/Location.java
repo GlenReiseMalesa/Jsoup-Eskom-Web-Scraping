@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,7 +14,7 @@ public class Location {
 
 	private static HttpURLConnection connection;
 	static ArrayList<LocationModel> location = new ArrayList<LocationModel>();//all the location data
-	
+	static int id = 0;
 	
 	public Location() {
 		// TODO Auto-generated constructor stub
@@ -138,8 +138,10 @@ public static String MunicipalityHttpReqAndRes(String URL) {
   
 		JSONArray bodies = new JSONArray("["+response+"]");
 		
+		
+		
 		for(int i = 0;i<bodies.length();i++) {
-			
+		
 			JSONObject body = bodies.getJSONObject(i);
 			
 			String surburb = body.getString("text");
@@ -149,8 +151,10 @@ public static String MunicipalityHttpReqAndRes(String URL) {
 			
 			//this is where our location list will be filled
 			//not everything is being added to the list..........fix this tomorrow
+			id += 1;
 			
-			location.add(new LocationModel(provinceName,municipalityName,surburb,surburbIndex));
+			
+			location.add(new LocationModel(provinceName,municipalityName,surburb,surburbIndex,id));
 			
 		}
 	}
