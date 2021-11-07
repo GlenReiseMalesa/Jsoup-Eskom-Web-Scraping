@@ -11,23 +11,21 @@ public class Schedule {
 	
 	 public static ArrayList<ScheduleModel> LoadSheddingFullSchedule = new ArrayList<>();
 	 
-		public Schedule() {
+		public Schedule(String search) {
 			
 			//accessing the location data
 	        Location l  = new Location();    
 	        
 	        ///Everything needed to get back the schedule of each surburb           
 		     //Getting the loadshedding schedule 
-		    	 System.out.println("Loadshedding Stage "+Schedule.loadSheddingStatus());
-		    	 String search = "Daggafontein";
-		    	 
-		    	 
-		    	 for(int i=1;i < Location.location.size();i++) {
+		    	
+		    	 		    	  
+		    	 for(int i=0;i < Location.location.size();i++) {
 		    		 
 		    		 
 		    		 if (Location.location.get(i).surburb.equals(search)) {
 	                      
-	                      System.out.println(Location.location.get(i).surburbIndex);
+	                      System.out.println(Location.location.get(i).id);
 		    	    	 //Storing the schedule of each surburb using surburb index
 		   	    	     Schedule.LoadSheddingSchedule("https://loadshedding.eskom.co.za/LoadShedding/GetScheduleM/"+Location.location.get(Location.location.get(i).id-1).surburbIndex+"/"+Schedule.loadSheddingStatus()+"/1/704",Location.location.get(Location.location.get(i).id-1).surburb,Location.location.get(Location.location.get(i).id-1).municipality,Location.location.get(Location.location.get(i).id-1).province); 
 		   	    	     break;
@@ -108,6 +106,11 @@ public class Schedule {
 		}
 	}
 	
+	
+	
+	public void initialize() {
+		System.out.println("This application was created by Glen Reise Malesa.Enjoy!!");
+	}
 	
 
 }
