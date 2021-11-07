@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +12,7 @@ import org.jsoup.select.Elements;
 
 public class Main {
 
-	
+	 public static ArrayList<ScheduleModel> LoadSheddingFullSchedule = new ArrayList<>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -19,19 +20,23 @@ public class Main {
 
 		//accessing the location data
            Location l  = new Location();     
+          
            System.out.println(Location.location.get(10000).province);
            
            
            
+           
+           
+///Everything needed to get back the schedule of each surburb           
         //Getting the loadshedding schedule 
        	 System.out.println("Loadshedding Stage "+loadSheddingStatus());
        	 
-       	 //Getting the schedule of each surburb
-       	LoadSheddingSchedule("https://loadshedding.eskom.co.za/LoadShedding/GetScheduleM/"+Location.location.get(10000).surburbIndex+"/"+loadSheddingStatus()+"/1/704",Location.location.get(10000).surburb);
+       	//Getting the schedule of each surburb using surburb index
+       	  LoadSheddingSchedule("https://loadshedding.eskom.co.za/LoadShedding/GetScheduleM/"+Location.location.get(10000).surburbIndex+"/"+loadSheddingStatus()+"/1/704",Location.location.get(10000).surburb);
        	 
        	  	 
-       	 
-       	 
+       	
+               	 
 		
 	}
 	
@@ -56,13 +61,26 @@ public class Main {
 	           while(m.find( )) {
 	        	   //get all the schedules for each day
 	        	    String dailyScheduleDATETIME = m.group();
-	        	    System.out.println(dailyScheduleDATETIME);
+	        	    
 	        	    
 	        	   //now we have to break up all the daily schedules times in the string
-		
+	        	    String loadSheddingDate = "";
+	        	    Matcher dateMatcher = Pattern.compile("([A-Z])\\w+[,][\\s]\\d+[\\s]([A-Z])\\w+").matcher(dailyScheduleDATETIME);
+	        	    while(dateMatcher.find()) {
+	        	    	//getting the date
+	        	    	loadSheddingDate = dateMatcher.group();
+	        	    }
 	        	    
-	        	    
-	        	    
+	        	    Matcher timeMatcher = Pattern.compile("(\\d+[:]\\d+[\\s][-][\\s]\\d+[:]\\d+)+").matcher(dailyScheduleDATETIME); 
+	        	    while(timeMatcher.find()) {
+	        	    	//getting the times
+	        	    	String loadSheddingTime = "";
+	        	    	loadSheddingTime = timeMatcher.group();
+	        	    	
+	        	    	
+	        	    	//This is where we get the proper schedule
+	        	        LoadSheddingFullSchedule.add(new ScheduleModel(surburb, loadSheddingDate, loadSheddingTime));
+	        	    }
 	        	    
 	           }
 	         

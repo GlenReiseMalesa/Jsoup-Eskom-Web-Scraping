@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class Location {
 
 	private static HttpURLConnection connection;
-	public static ArrayList<LocationModel> location = new ArrayList<LocationModel>();//all the location data
+	static ArrayList<LocationModel> location = new ArrayList<LocationModel>();//all the location data
 	
 	
 	public Location() {
