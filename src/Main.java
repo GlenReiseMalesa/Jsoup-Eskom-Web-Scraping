@@ -20,28 +20,29 @@ public class Main {
 
 		//accessing the location data
            Location l  = new Location();     
-          
-           System.out.println(Location.location.get(10000).province);
-           
-           
-           
- /*          
+                 
            
 ///Everything needed to get back the schedule of each surburb           
         //Getting the loadshedding schedule 
        	 System.out.println("Loadshedding Stage "+loadSheddingStatus());
        	 
        	//Storing the schedule of each surburb using surburb index
-       	 for(int i = 10000 ;i < Location.location.size();i++) {
+       	 for(int i = 1 ;i < Location.location.size();i++) {
        	  LoadSheddingSchedule("https://loadshedding.eskom.co.za/LoadShedding/GetScheduleM/"+Location.location.get(i).surburbIndex+"/"+loadSheddingStatus()+"/1/704",Location.location.get(i).surburb,Location.location.get(i).municipality,Location.location.get(i).province); 
-       
-          //Getting the schedule of each surburb using 
-         	for(int k = 1 ;k < LoadSheddingFullSchedule.size();k++) {
-         	  System.out.println(LoadSheddingFullSchedule.get(k).province+" "+LoadSheddingFullSchedule.get(k).Time);
-         	}
+      
+      	  String display ="";
+         //Getting the schedule of each surburb using 
+        	for(int k = 1 ;k < LoadSheddingFullSchedule.size();k++) {
+        		
+        		display += LoadSheddingFullSchedule.get(k).province+" "+LoadSheddingFullSchedule.get(k).municipality+" "+LoadSheddingFullSchedule.get(k).suburb+" "+LoadSheddingFullSchedule.get(k).Date+" "+LoadSheddingFullSchedule.get(k).Time+"\n";
+        	  
+        	}
+          System.out.println(display);
+       	 
        	 }
        	 
-*/
+
+
 
 		
 	}
