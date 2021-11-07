@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+
 import org.jsoup.select.Elements;
 
 public class Main {
@@ -25,24 +25,30 @@ public class Main {
            
            
            
-           
+ /*          
            
 ///Everything needed to get back the schedule of each surburb           
         //Getting the loadshedding schedule 
        	 System.out.println("Loadshedding Stage "+loadSheddingStatus());
        	 
-       	//Getting the schedule of each surburb using surburb index
-       	  LoadSheddingSchedule("https://loadshedding.eskom.co.za/LoadShedding/GetScheduleM/"+Location.location.get(10000).surburbIndex+"/"+loadSheddingStatus()+"/1/704",Location.location.get(10000).surburb);
+       	//Storing the schedule of each surburb using surburb index
+       	 for(int i = 10000 ;i < Location.location.size();i++) {
+       	  LoadSheddingSchedule("https://loadshedding.eskom.co.za/LoadShedding/GetScheduleM/"+Location.location.get(i).surburbIndex+"/"+loadSheddingStatus()+"/1/704",Location.location.get(i).surburb,Location.location.get(i).municipality,Location.location.get(i).province); 
+       
+          //Getting the schedule of each surburb using 
+         	for(int k = 1 ;k < LoadSheddingFullSchedule.size();k++) {
+         	  System.out.println(LoadSheddingFullSchedule.get(k).province+" "+LoadSheddingFullSchedule.get(k).Time);
+         	}
+       	 }
        	 
-       	  	 
-       	
-               	 
+*/
+
 		
 	}
 	
 	
 	
-	public static void LoadSheddingSchedule(String url,String surburb) {
+	public static void LoadSheddingSchedule(String url,String surburb,String municipality,String province) {
 		
         Document doc;
         
@@ -79,7 +85,7 @@ public class Main {
 	        	    	
 	        	    	
 	        	    	//This is where we get the proper schedule
-	        	        LoadSheddingFullSchedule.add(new ScheduleModel(surburb, loadSheddingDate, loadSheddingTime));
+	        	        LoadSheddingFullSchedule.add(new ScheduleModel(province,municipality,surburb, loadSheddingDate, loadSheddingTime));
 	        	    }
 	        	    
 	           }
